@@ -25,6 +25,16 @@ output.path要求使用绝对路径
 
 
 
+## 二、模块打包
+
+### CommonJS
+
+CommonJS是JavaScript社区于2009年提出的一系列标准。Node.js的实现中采用了CommonJS标准中的一部分，并在其基础上进行了一系列调整。一般谈到CommonJS其实是Node.js中的版本，而非它的原始定义。
+
+​
+
+
+
 
 
 
