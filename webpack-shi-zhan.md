@@ -76,11 +76,40 @@ exports.add = function (a, b) {
 
         require可以接收表达式，从而可以动态指定模块的加载路径。
 
-       
+### ES6 Module
 
+        每个文件作为一个模块，每个模块拥有自身的作用域。import和export作为保留关键字，在ES6中加入。
 
+        ES6 Module会自动采用**严格模式**
 
+#### **模块导出**
 
+**1.命名导出**
+
+```javascript
+// 写法1
+export const name = 'calculator';
+export const add = function(a, b) { return a + b; }
+
+// 写法2
+const name = 'calculator';
+const add = function (a, b) { return a + b; }
+
+export { name, add }
+```
+
+使用命名导出时，可通过as关键字对变量重命名。
+
+```javascript
+const name = 'calculator';
+const add = function (a, b) { return a + b; }
+
+export { name, add as getSum }
+```
+
+2.默认导出
+
+#### 模块导入
 
 
 
