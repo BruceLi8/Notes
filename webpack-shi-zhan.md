@@ -111,15 +111,59 @@ export { name, add as getSum }
 
 #### 模块导入
 
+1. 命名导入：对应命名导出的模块，同时也可使用as对导入变量重命名。
+2. 导入多个变量时，可以使用整体导入，减少对当前作用域的影响。import \* as &lt;myModule&gt;
+3. 对默认导入，变量名可以自由指定。
 
+#### 重导出
 
+```javascript
+export { name, add } from './calculator.js';
+```
 
+### CommonJS 与ES Module的区别
 
+#### 动态与静态：
 
+CommonJS对模块依赖的解决是动态的：模块依赖的建立发生在代码的运行阶段；
 
+ES6 Module对模块依赖的解决是静态的： 模块依赖的建立发生在代码的编译阶段；
 
+ES6 Module相比CommonJS具有的优势：
 
+1. 死代码检测和排除
+2. 模块变量类型检查。有助于确保模块之间传递的值或接口类型的正确。
+3. 编译器优化。CommonJS传递的是对象，ES6 Module支持直接导入变量，减少引用层级。
 
+#### 值拷贝与动态映射：
 
+CommonJS获取的是一份导出值的拷贝。对导入值的修改操作不会影响导出模块。
 
+ES6 Module中获取的是值的动态映射，且这个值是动态只读的。
+
+#### 循环依赖：
+
+CommonJS中，若遇到循环依赖，我们没有办法得到预想中的效果。
+
+```javascript
+// The require function
+function __webpack_requrie__(moduleId) {
+    if(installedModules(moduleId) {
+        return installedModules[moduleId].exports;
+    }
+    // Create a new module (and put it into the cache)
+    var module = installedModules[moduleId] = {
+        i: moudleId,
+        l: false,
+        exports: {}
+    };
+    ...
+}
+```
+
+代码解释：循环引用中，再次引用时，直接从installedModules里面取值，此时module.exports是空对象。                      
+
+ES Module中，由于动态映射的特性，循环依赖在在返回时，值从undefined变化为已定义的值，从而解决了循环依赖。
+
+####                                                                                       
 
