@@ -165,5 +165,58 @@ function __webpack_requrie__(moduleId) {
 
 ES Module中，由于动态映射的特性，循环依赖在在返回时，值从undefined变化为已定义的值，从而解决了循环依赖。
 
+### 加载其他类型模块
+
+#### 非模块文件
+
+例如，jQuery及其插件
+
+```javascript
+import './jquery.min.js';
+```
+
+如果非模块文件以隐式全局变量声明方式暴露接口，则会发生问题。因为webpack在打包时会为每个文件包装一层函数作用域来避免全局污染。
+
+#### AMD \(Asyncchromous Module Definition\)
+
+```javascript
+define('getSum', ['calculator'], function (math) {
+    return funtion(a, b) {
+        console.log('sum: ' + calculator.add(a, b));
+    }
+})
+
+require(['getSum'], function (getSum) {
+    getSum(2, 3);
+}
+```
+
+优点：模块加载是非阻塞性的。
+
+缺点：语法冗长，异步加载方式不如同步加载方式清晰，容易形成回调地狱。
+
+#### UMD \(Universal Module Definition\)
+
+```javascript
+(function (global, main) {
+    if(typeof define === 'function' && define.amd) {
+        // AMD
+        define(...);
+    } else if(typeof exports === 'object') {
+        // CommonJS
+        module.exports = ...;
+    } else {
+        global.add = ...;
+    }
+})(this, function () {
+    // 定义模块主体
+    return {...}
+})
+```
+
+
+
+
+
 ####                                                                                       
 
