@@ -377,3 +377,34 @@ margin可设置为负值，从而可以用于推拉元素在页面上的位置�
 
 百分比margin：宽度为占父元素的width百分比值。上下的margin和padding则不一样。此时，父元素的高度还未声明。CSS规范指出：上下margin和padding的值，由containter block的宽度得出。
 
+### 视觉格式化模型
+
+display: block, inline, none
+
+positioning models: floats, absolute positioning, relative positioning.除非指定，所有盒子在正常流中被定位，有默认属性static。如同名字那样，在正常流中一个盒子的位置由元素在HTML中的位置确定。
+
+块级盒子在垂直方向一次显示，盒子间的垂直距离由盒子垂直margin决定。
+
+内联盒子被水平放置在行内，沿着文本方向，当文本换行时，换到新的一行。其水平间距可以通过使用水平内边距，边框，外边距调整。然而，垂直的内边距，边框，外边距不会对内联盒子的高度产生影响。
+
+形成一行文本的水平盒子被称为行盒子（line box），调整行盒子的尺寸的唯一方式是改变行高，或设置内部的水平边框，内边距，外边距。
+
+当使用table元素时，table表现得为block，table内部根据生成得行与列排列。也可以通过设置display: table, table-row, table-cell，实现HTML中的表格，而不使用table标记。
+
+#### 匿名盒子
+
+```markup
+<section>
+    some text
+    <p>Some more text</p>
+</section>
+```
+
+some text会形成匿名块盒子。
+
+#### 外边距合并
+
+上下外边距合并，内外盒子的外边距合并，无内容元素上下外边距合并。
+
+这就是为什么空白段落元素站住很小空间的原因：所有margin合并在一起组成了一个小的外边距。
+
